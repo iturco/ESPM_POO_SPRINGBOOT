@@ -1,33 +1,37 @@
 package br.espm.poo_springboot.Springbootespm.repository;
 
+import br.espm.poo_springboot.Springbootespm.models.Cliente;
 import java.util.stream.BaseStream;
 import java.util.stream.Stream;
+import org.springframework.data.repoository.CrudRepository;
 
-import br.espm.poo_springboot.Springbootespm.models.Cliente;
+public interface CliRepository extends CrudRepository<Cliente, String> {
 
-public class CliRepository {
+    @Override
+    Iterable<Cliente> findAll();
 
-    public BaseStream findAll() {
-        return null;
-    }
+  @Override
+  Optional<Cliente> findById(String s);
 
-    public BaseStream findAll() {
-        return null;
-    }
+  @Override
+  Cliente save(Clietne cli);
 
-    public Stream findById(String string) {
-        return null;
-    }
-
-    public Object listByCliName(String name) {
-        return null;
-    }
-
-    public Cliente save(Cliente cliente) {
-        return null;
-    }
-
-    public void deleteById(String string) {
-    }
-    
+  @Override
+  void deleteById(String s);
 }
+//   public BaseStream findAll() {
+//     return null;
+//   }
+//   public BaseStream findAll() {
+//     return null;
+//   }
+//   public Stream findById(String string) {
+//     return null;
+//   }
+//   public Object listByCliName(String name) {
+//     return null;
+//   }
+//   public Cliente save(Cliente cliente) {
+//     return null;
+//   }
+//   public void deleteById(String string) {}
