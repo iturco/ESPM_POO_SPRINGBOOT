@@ -11,10 +11,10 @@ public class CliResource {
     @Autowired
     private CliService cli;
     
-    @GetMapping(path = "/client")
+    @GetMapping(path = "/cliente")
     public List<CliBean> ListAll() { return CliService.ListAll();}
 
-    @GetMapping(path = "/client/{id}")
+    @GetMapping(path = "/cliente/{id}")
     public CliBean findBy (@PathVariable UUID id) {
         CliBean foundCli = CliService.findBy(id);
         if(foundCli == null) {
@@ -22,8 +22,12 @@ public class CliResource {
         }
         return foundCli;
     }
+    @GetMapping(path = "cliente/nome/{name}")
+    public List<CliBean> listByName(@PathVariable String name) {
+        return CliService.listByName(name);
+    }
 
-    @PostMapping(path = "/customers")
+    @PostMapping(path = "/clientes")
     public ResponseEntity<Object> save(@RequestBody CliBean cli) {
         CliBean savedCli = CliService.create(cli);
     }
@@ -35,6 +39,6 @@ public class CliResource {
     return ResponseEntity.created(location).build();
 }
 
-@DeleteMapping(path = "/customers/{id}") 
+@DeleteMapping(path = "/clientes/{id}") 
 public void deleteBy(@PathVariable UUID id) {CliService.delete(id);
 }

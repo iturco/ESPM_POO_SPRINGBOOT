@@ -7,8 +7,8 @@ import org.springframework.data.repoository.CrudRepository;
 
 public interface CliRepository extends CrudRepository<Cliente, String> {
 
-    @Override
-    Iterable<Cliente> findAll();
+  @Override
+  Iterable<Cliente> findAll();
 
   @Override
   Optional<Cliente> findById(String s);
@@ -18,6 +18,11 @@ public interface CliRepository extends CrudRepository<Cliente, String> {
 
   @Override
   void deleteById(String s);
+
+
+  //ACHO Q TA ERRADO
+  @Querry("SELECT u FROM Cliente u WHERE u.cli_nome u LIKE (CONTACT('%', :name, '%'))")
+  List<Cliente> listByName(@Param ("name") String name);
 }
 //   public BaseStream findAll() {
 //     return null;

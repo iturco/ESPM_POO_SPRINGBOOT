@@ -20,7 +20,6 @@ public class CliService {
     list<CliBean> listaCli = new ArrayList<>();
     CliRepository.findAll().forEach(Cliente -> listaCli.add(Cliente.to));
     return listaCli;
-    
     // return StreamSupport
     //   .stream(CliRepository.findAll().spliterator(), false)
     //   .collect(Collectors.toList())
@@ -30,7 +29,7 @@ public class CliService {
   }
 
   public CliBean findBy(UUID id) {
-    Optional <Cliente> c = CliRepository.findById(id.toString()).get();
+    Optional<Cliente> c = CliRepository.findById(id.toString()).get();
     return c.isEmpty() ? null : c.get().to();
     // return CliRepository
     //         .findById(id.toString())
@@ -44,6 +43,14 @@ public class CliService {
       .stream()
       .map(Cliente::to)
       .collect(Collectors.toList());
+  }
+
+  public List<CliBean> listByName(String name) {
+    CliRepository
+      .listByName()
+      .stream()
+      .map(Cliente::to)
+      .collect(Collectors.tolist());
   }
 
   public CliBean create(CliBean Cli) {
