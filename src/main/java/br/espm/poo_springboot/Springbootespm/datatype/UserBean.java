@@ -1,16 +1,17 @@
-package br.espm.poo_springboot.Springbootespm.DataType;
+package br.espm.poo_springboot.Springbootespm.datatype;
 
 import java.util.UUID;
 
-public class CliBean {
+public class UserBean {
+
     private UUID id;
     private String name;
 
-    public CliBean() {
+    public UserBean() {
 
     }
 
-    public CliBean(UUID id, String name) {
+    public UserBean(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -33,9 +34,10 @@ public class CliBean {
 
     @Override
     public String toString() {
-        return "CliBean{" +
+        return "UserBean{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

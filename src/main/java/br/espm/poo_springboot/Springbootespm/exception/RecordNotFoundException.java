@@ -1,11 +1,13 @@
-package br.espm.poo_springboot.exception;
+package br.espm.poo_springboot.Springbootespm.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class RecordNotFoundException extends RuntimeException {
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public RecordNotFoundException(String message) {
         super(message);
     }
+
 }
