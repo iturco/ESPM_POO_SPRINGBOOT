@@ -1,13 +1,12 @@
 package br.espm.poo_springboot.carteira;
 
-import br.espm.poo_springboot.cambio.common.controller.CambioController;
-import br.espm.poo_springboot.cambio.common.datatype.Cotacao;
-import br.espm.poo_springboot.cambio.common.datatype.Moeda;
+import br.espm.poo_springboot.ativo.controller.AtivoController;
+import br.espm.poo_springboot.ativo.datatype.Cotacao;
+import br.espm.poo_springboot.ativo.datatype.Ativo;
 import br.espm.poo_springboot.carteira.common.datatype.Carteira;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoBean;
-import br.espm.poo_springboot.carteira.common.datatype.TransacaoCambio;
+import br.espm.poo_springboot.carteira.common.datatype.TransacaoAtivo;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoTipo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,28 +18,28 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
-public class TransacaoCambioService {
+public class TransacaoAtivoService {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
     @Autowired
-    private CambioController cambioController;
+    private AtivoController ativoController;
 
     @Autowired
     private CarteiraService carteiraService;
 
     @Autowired
-    private TransacaoCambioRepository transacaoCambioRepository;
+    private TransacaoAtivoRepository transacaoAtivoRepository;
 
-    public List<TransacaoCambio> listByCarteira(String idCarteira) {
-        List<TransacaoCambio> l = transacaoCambioRepository
+    public List<TransacaoAtivo> listByCarteira(String idCarteira) {
+        List<TransacaoAtivo> l = transacaoAtivoRepository
                 .listByCarteira(idCarteira).stream()
-                .map(TransacaoCambioModel::to)
+                .map(TransacaoAtivoModel::to)
                 .collect(Collectors.toList());
         return l;
     }
 
-    public TransacaoCambio comprar(String idCarteira, TransacaoBean bean) {
+    public TransacaoAtivo compra(String idCarteira, TransacaoBean bean) {
         Carteira c = carteiraService.findBy(idCarteira);
         if (c == null) {
             throw new RuntimeException("Carteira nao existe: " + idCarteira);
@@ -48,17 +47,17 @@ public class TransacaoCambioService {
 
         Date agora = new Date();
 
-        Moeda moeda = cambioController.moedas(bean.getSimbolo());
-        if (moeda == null) {
-            throw new RuntimeException("Moeda nao existe: " + bean.getSimbolo());
+        Ativo ativo = ativoController.ativos(bean.getSimbolo());
+        if (ativo == null) {
+            throw new RuntimeException("Ativo nao existe: " + bean.getSimbolo());
         }
 
-        Cotacao cotacao = cambioController.cotacao(moeda.getSimbolo(), sdf.format(agora));
+        Cotacao cotacao = ativoController.cotacao(ativo.getSimbolo(), sdf.format(agora));
         if (cotacao == null) {
             throw new RuntimeException("Cotacao nao existe: " + sdf.format(agora));
         }
 
-        TransacaoCambio tc = new TransacaoCambio();
+        TransacaoAtivo tc = new TransacaoAtivo();
         tc.setId(UUID.randomUUID().toString());
         tc.setCarteira(c);
         tc.setCotacao(cotacao);
@@ -66,10 +65,10 @@ public class TransacaoCambioService {
         tc.setQuantidade(bean.getQtd());
         tc.setData(agora);
 
-        return transacaoCambioRepository.save(new TransacaoCambioModel(tc)).to();
+        return transacaoAtivoRepository.save(new TransacaoAtivoModel(tc)).to();
     }
 
-    public TransacaoCambio vender(String idCarteira, TransacaoBean bean) {
+    public TransacaoAtivo venda(String idCarteira, TransacaoBean bean) {
         Carteira c = carteiraService.findBy(idCarteira);
         if (c == null) {
             throw new RuntimeException("Carteira nao existe: " + idCarteira);
@@ -77,12 +76,12 @@ public class TransacaoCambioService {
 
         Date agora = new Date();
 
-        Moeda moeda = cambioController.moedas(bean.getSimbolo());
-        if (moeda == null) {
-            throw new RuntimeException("Moeda nao existe: " + bean.getSimbolo());
+        Ativo ativo = ativoController.ativos(bean.getSimbolo());
+        if (ativo == null) {
+            throw new RuntimeException("Ativo nao existe: " + bean.getSimbolo());
         }
 
-        Cotacao cotacao = cambioController.cotacao(moeda.getSimbolo(), sdf.format(agora));
+        Cotacao cotacao = ativoController.cotacao(ativo.getSimbolo(), sdf.format(agora));
         if (cotacao == null) {
             throw new RuntimeException("Cotacao nao existe: " + sdf.format(agora));
         }
@@ -92,7 +91,7 @@ public class TransacaoCambioService {
             throw new RuntimeException("Cotacao limite, atual: " + cotacao.getValor());
         }
 
-        TransacaoCambio tc = new TransacaoCambio();
+        TransacaoAtivo tc = new TransacaoAtivo();
         tc.setId(UUID.randomUUID().toString());
         tc.setCarteira(c);
         tc.setCotacao(cotacao);
@@ -100,7 +99,7 @@ public class TransacaoCambioService {
         tc.setQuantidade(bean.getQtd());
         tc.setData(agora);
 
-        return transacaoCambioRepository.save(new TransacaoCambioModel(tc)).to();
+        return transacaoAtivoRepository.save(new TransacaoAtivoModel(tc)).to();
     }
 
 }

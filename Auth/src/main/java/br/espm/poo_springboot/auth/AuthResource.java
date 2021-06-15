@@ -1,4 +1,4 @@
-package br.espm.poo_springboot.cambio;
+package br.espm.poo_springboot.auth;
 
 import br.espm.poo_springboot.auth.UsuarioService;
 import br.espm.poo_springboot.auth.common.controller.AuthController;

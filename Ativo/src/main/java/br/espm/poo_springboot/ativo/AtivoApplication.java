@@ -1,4 +1,4 @@
-package br.espm.poo_springboot_springboot.ativo;
+package br.espm.poo_springboot.ativo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

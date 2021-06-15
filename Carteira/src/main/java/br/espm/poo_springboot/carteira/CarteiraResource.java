@@ -1,10 +1,12 @@
 package br.espm.poo_springboot.carteira;
 
+import br.espm.poo_springboot.carteira.TransacaoAtivoService;
 import br.espm.poo_springboot.cambio.common.controller.CambioController;
 import br.espm.poo_springboot.cambio.common.datatype.Cotacao;
 import br.espm.poo_springboot.cambio.common.datatype.Moeda;
 import br.espm.poo_springboot.carteira.common.controller.CarteiraController;
 import br.espm.poo_springboot.carteira.common.datatype.Carteira;
+import br.espm.poo_springboot.carteira.common.datatype.TransacaoAtivo;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoBean;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoCambio;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoTipo;
@@ -19,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@EnableFeignClients(basePackages = "br.espm.poo_springboot.cambio.common.controller")
+@EnableFeignClients(basePackages = "br.espm.poo_springboot.cambio.common.controller"+"br.espm.poo_springboot.ativo.controller"  )
 @RestController
 public class CarteiraResource implements CarteiraController {
 
@@ -28,6 +30,8 @@ public class CarteiraResource implements CarteiraController {
 
     @Autowired
     private TransacaoCambioService transacaoCambioService;
+    @Autowired
+    private TransacaoAtivoService transacaoAtivoService;
 
     @Override
     public List<Carteira> carteiras() {
@@ -54,6 +58,15 @@ public class CarteiraResource implements CarteiraController {
     @Override
     public TransacaoCambio cambioVender(String idCarteira, TransacaoBean bean) {
         return transacaoCambioService.vender(idCarteira, bean);
+    }
+    @Override
+    public TransacaoAtivo ativoComprar(String idCarteira, TransacaoBean bean) {
+        return transacaoAtivoService.compra(idCarteira, bean);
+    }
+
+    @Override
+    public TransacaoAtivo ativoVender(String idCarteira, TransacaoBean bean) {
+        return transacaoAtivoService.venda(idCarteira, bean);
     }
 
 }

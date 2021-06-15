@@ -1,6 +1,7 @@
 package br.espm.poo_springboot.carteira.common.controller;
 
 import br.espm.poo_springboot.carteira.common.datatype.Carteira;
+import br.espm.poo_springboot.carteira.common.datatype.TransacaoAtivo;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoBean;
 import br.espm.poo_springboot.carteira.common.datatype.TransacaoCambio;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -31,6 +32,17 @@ public interface CarteiraController {
 
     @PostMapping("carteiras/{idCarteira}/cambio/vender")
     TransacaoCambio cambioVender(
+            @PathVariable String idCarteira,
+            @RequestBody TransacaoBean bean
+    );
+    @PostMapping("carteiras/{idCarteira}/ativo/comprar")
+    TransacaoAtivo ativoComprar(
+            @PathVariable String idCarteira,
+            @RequestBody TransacaoBean bean
+    );
+
+    @PostMapping("carteiras/{idCarteira}/ativo/vender")
+    TransacaoAtivo ativoVender(
             @PathVariable String idCarteira,
             @RequestBody TransacaoBean bean
     );
