@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@EnableFeignClients(basePackages = "br.espm.poo_springboot.cambio.common.controller"+"br.espm.poo_springboot.ativo.controller"  )
+@EnableFeignClients(basePackages = {"br.espm.poo_springboot.cambio.common.controller","br.espm.poo_springboot.ativo.controller"}  )
 @RestController
 public class CarteiraResource implements CarteiraController {
 
