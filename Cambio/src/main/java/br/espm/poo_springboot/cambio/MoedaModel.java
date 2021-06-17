@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class MoedaModel {
 
     @Id
-    @Column(name = "id_moeda")
+    @Column(name = "idMoeda")
     private String idMoeda;
 
-    @Column(name = "tx_nome")
+    @Column(name = "txNome")
     private String txNome;
-    @Column(name = "tx_simbolo")
+    @Column(name = "txSimbolo")
     private String txSimbolo;
 
     public MoedaModel() {

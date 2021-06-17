@@ -19,8 +19,7 @@ public class CarteiraModel {
     @Column(name = "id_usuario")
     private String idUsuario;
 
-    @Column(name = "vr_saldo")
-    private BigDecimal vrSaldo;
+
 
     public CarteiraModel() {
 
@@ -29,7 +28,7 @@ public class CarteiraModel {
     public CarteiraModel(Carteira c) {
         this.idCarteira = c.getId();
         // this.idUsuario = c.getUsuario.getId();
-        this.vrSaldo = c.getSaldo();
+      
     }
 
     public Carteira to() {
@@ -38,7 +37,7 @@ public class CarteiraModel {
 
         Carteira c = new Carteira();
         c.setId(this.idCarteira);
-        c.setSaldo(this.vrSaldo);
+      
         // c.setUsuario(usuario);
         return c;
     }

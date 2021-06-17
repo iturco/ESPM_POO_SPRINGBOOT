@@ -5,6 +5,13 @@ CREATE TABLE `espm.poo.ativo`.`cotacao` (
   `dtData` DATE NOT NULL,
   PRIMARY KEY (`idCotacao`));
 
+  ALTER TABLE `espm.poo.ativo`.`cotacao` 
+CHANGE COLUMN `idCotacao` `id_cotacao` VARCHAR(64) NOT NULL ,
+CHANGE COLUMN `idAtivo` `id_ativo` VARCHAR(64) NOT NULL ,
+CHANGE COLUMN `nrValor` `vr_valor` DECIMAL(12,2) NOT NULL ,
+CHANGE COLUMN `dtData` `dt_data` DATE NOT NULL ;
+
+
 
 INSERT INTO cotacao
 (idCotacao,

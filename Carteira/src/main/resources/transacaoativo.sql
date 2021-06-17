@@ -4,5 +4,5 @@ CREATE TABLE `espm.poo.carteira`.`transacaocarteira` (
   `id_cotacao` VARCHAR(64) NOT NULL,
   `dt_data` DATETIME NOT NULL,
   `nr_qtd` DECIMAL(14,4) NOT NULL,
-  `nrTipo` INT NOT NULL,
+  `nr_tipo` INT NOT NULL,
   PRIMARY KEY (`id_transacaocarteira`));

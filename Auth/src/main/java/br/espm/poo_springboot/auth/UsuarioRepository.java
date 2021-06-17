@@ -11,5 +11,7 @@ public interface UsuarioRepository extends CrudRepository<UsuarioModel, String> 
 
     @Override
     Optional<UsuarioModel> findById(String s);
-
+   
+    @Override
+    UsuarioModel save(UsuarioModel s);
 }

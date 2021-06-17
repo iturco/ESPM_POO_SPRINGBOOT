@@ -30,4 +30,12 @@ public class UsuarioService {
                 .orElse(null);
     }
 
+    public Usuario create(Usuario user) {
+        
+            user.setId(UUID.randomUUID().toString());
+            return usuarioRepository.save(new UsuarioModel(user)).to();
+        }
+
+    
+
 }

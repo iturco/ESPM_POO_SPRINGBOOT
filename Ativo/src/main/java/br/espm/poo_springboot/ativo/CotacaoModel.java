@@ -12,17 +12,17 @@ import java.util.Date;
 public class CotacaoModel {
 
     @Id
-    @Column(name = "id_cotacao")
+    @Column(name = "idCotacao")
     private String idCotacao;
 
-    @Column(name = "id_ativo")
+    @Column(name = "idAtivo")
     private String idAtivo;
 
-    @Column(name = "dt_data")
+    @Column(name = "dtData")
     @Temporal(TemporalType.DATE)
     private Date dtData;
 
-    @Column(name = "vr_valor")
+    @Column(name = "vrValor")
     private BigDecimal vrValor;
 
     public CotacaoModel() {

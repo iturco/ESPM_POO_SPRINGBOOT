@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class AtivoModel {
 
     @Id
-    @Column(name = "id_ativo")
+    @Column(name = "idAtivo")
     private String idAtivo;
 
-    @Column(name = "tx_nome")
+    @Column(name = "txNome")
     private String txNome;
-    @Column(name = "tx_simbolo")
+    @Column(name = "txSimbolo")
     private String txSimbolo;
 
     public AtivoModel() {
